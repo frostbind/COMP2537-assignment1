@@ -6,7 +6,7 @@ function processPokeResp(data){
     // 3- process the reponse and extract the img
     to_add += `
     <div class="pokemon_container">
-        <p>${data.name}</p>
+        <h2>${data.name}</h2>
         <div class="image_container">
             <a href="/profile/${data.id}">  
                 <img src="${data.sprites.other["official-artwork"].front_default}">
