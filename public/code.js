@@ -3,13 +3,17 @@ to_add = ''
 
 function processPokeResp(data){
     // console.log(data)
-     // 3- process the reponse and extract the img
-     to_add += ` ${data.name}
-      <div class="image_container">
-      <a href="/profile/${data.id}">  
-      <img src="${data.sprites.other["official-artwork"].front_default}">
-      </a>
-      </div>`
+    // 3- process the reponse and extract the img
+    to_add += `
+    <div class="pokemon_container">
+        <p>${data.name}</p>
+        <div class="image_container">
+            <a href="/profile/${data.id}">  
+                <img src="${data.sprites.other["official-artwork"].front_default}">
+            </a>
+        </div>
+    </div>
+    `
 }
 
 async function loadNineImages() {
