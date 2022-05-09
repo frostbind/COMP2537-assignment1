@@ -3,54 +3,32 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="code.js"></script>
-    <link rel="stylesheet" href="styles.css">
-
+    <link rel="stylesheet" href="\styles/index.css">
+    <link rel="stylesheet" href="\styles/header.css">
 </head>
 
 <body>
-
-    <div id="outer">
-        <header>
-            <h1>
-                Pokemon Gallery
-            </h1>
-        </header>
-
+    <header>
         <nav>
-            <div id="nav_div">
-                <a href="">
-                    Link 1
-                </a>
-
-                <a href="">
-                    Link 2
-                </a>
-
-                <a href="">
-                    Link 3
-                </a>
-            </div>
-
-            <div id="search_container">
-                <input type="text">
-                <button>
-                    Search
-                </button>
-            </div>
+            <form action="/home" method="get" id="homeButton">
+                
+            </form>
+            <form action="/search" method="get" id="searchButton">
+                <input type="submit" value="Search"/>
+            </form>
         </nav>
+        <h1>Pokemon Gallery</h1>
+    </header>
 
-        <main>
-           
-        </main>
+    <main>
+        
+    </main>
 
-        <footer>
-            <h5>
-                Copyright © Your Website 2022
-            </h5>
-        </footer>
-    </div>
-
-
+    <footer>
+        <h5>
+            Copyright © Your Website 2022
+        </h5>
+    </footer>
 </body>
 
 </html>

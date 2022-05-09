@@ -6,15 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="/styles/profile.css" type="text/css">
+    <link rel="stylesheet" href="/styles/header.css" type="text/css">
 </head>
 
 <body>
-    <h1> Hi there.
+    <header>
+        <nav>
+            <form action="/home" method="get" id="homeButton">
+                <input type="submit" value="Home"/>
+            </form>
+            <form action="/search" method="get" id="searchButton">
+                <input type="submit" value="Search"/>
+            </form>
+        </nav>
+        <h1> <%= pokeName %> (<%= pokeId %>)</h1>
+    </header>
+    <main>
+        
+        <div id="imgContainer">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= pokeId %>.png" alt="<%= pokeName %>">
+        </div>
+        
+        <div id="statsContainer">
+            <div class="stat">
+                <label for="hp">Health</label>
+                <progress id="hp" value="<%= hp %>" max="255"></progress>
+            </div>
 
-        This poemon has the id: <%= id %>
+            <div class="stat">
+                <label for="atk">Normal Attack</label>
+                <progress id="atk" value="<%= atk %>" max="255"></progress>
+            </div>
 
+            <div class="stat">
+                <label for="def">Normal Defense</label>
+                <progress id="def" value="<%= def %>" max="255"></progress>
+            </div>
+
+            <div class="stat">
+                <label for="sAtk">Special Attack</label>
+                <progress id="sAtk" value="<%= sAtk %>" max="255"></progress>
+            </div>
+
+            <div class="stat">
+                <label for="sDef">Special Defense</label>
+                <progress id="sDef" value="<%= sDef %>" max="255"></progress>
+            </div>
+
+            <div class="stat">
+                <label for="spd">Speed</label>
+                <progress id="spd" value="<%= spd %>" max="255"></progress>
+            </div>
+        </div>
+
+        <p></p>
+    </main>
+        
+    <footer>
+
+    </footer>
        
-    </h1>
+    
 </body>
 
 </html>
