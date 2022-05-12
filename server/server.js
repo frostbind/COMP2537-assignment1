@@ -4,10 +4,9 @@ const https = require("https");
 const mongoose = require("mongoose");
 app.set('view engine', 'ejs');
 
-app.listen(5000, function (err) {
-    if (err)
-        console.log(err);
-})  
+const router = express.Router();
+const test = require("./routes/test.js")
+const testMongo = require("./routes/testMongo.js")
 
 mongoose.connect("mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/assignment2?retryWrites=true&w=majority",
                         {
@@ -43,11 +42,23 @@ app.get('/profile/:id', function (req, res) {
     })
 })
 app.get("/home", function (req, res) {
-    res.redirect("/")
+    res.redirect("./index.html")
 })
 
 app.get("/search", function (req, res) {
-    res.redirect("search.html")
+    res.redirect("./search.html")
 })
 
-app.use(express.static('./public'));
+app.get("/timeline", function (req, res) {
+    res.redirect("./timeline.html")
+})
+
+app.use(express.static('./../public/'));
+
+app.use(test)
+app.use(testMongo)
+
+app.listen(5000, function (err) {
+    if (err)
+        console.log(err);
+})  

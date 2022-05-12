@@ -1,0 +1,11 @@
+{
+    "charmander": {
+        "name": "Charmander",
+        "id":   "",
+        "atk":  "",
+        "def":  "",
+        "sAtk": "",
+        "sDef": "",
+        "spd":  ""
+    }
+}
