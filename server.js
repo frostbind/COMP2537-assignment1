@@ -57,7 +57,7 @@ app.get("/timeline", function (req, res) {
     res.redirect("./timeline.html")
 })
 
-app.use(express.static('./../public/'));
+app.use(express.static('./public/'));
 
 app.use(test)
 app.use(testMongo)
