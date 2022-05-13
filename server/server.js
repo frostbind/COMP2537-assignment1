@@ -8,11 +8,15 @@ const router = express.Router();
 const test = require("./routes/test.js")
 const testMongo = require("./routes/testMongo.js")
 
-mongoose.connect("mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/assignment2?retryWrites=true&w=majority",
-                        {
-                            // useNewUrlParser: true,
-                            // useUnifiedtepology: true,
-                        });
+mongoose.connect("mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/assignment2?retryWrites=true&w=majority", function (err, db) {
+    if (err) {throw err}
+
+    db.collection('userAccounts').find().toArray((err, result) => {
+        if (err) {throw err}
+
+        console.log(result)
+    })
+});
 
 app.get('/profile/:id', function (req, res) {
     console.log(req.params);
