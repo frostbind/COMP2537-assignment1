@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const https = require("https");
+const port = process.env.PORT || 5000
 const mongoose = require("mongoose");
 app.set('view engine', 'ejs');
 
@@ -62,7 +63,7 @@ app.use(express.static('./public/'));
 app.use(test)
 app.use(testMongo)
 
-app.listen(5000, function (err) {
+app.listen(port, function (err) {
     if (err)
         console.log(err);
 })  
