@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 app.set('view engine', 'ejs');
 
 const router = express.Router();
-const test = require("./routes/test.js")
-const testMongo = require("./routes/testMongo.js")
+const test = require("./server/routes/test.js")
+const testMongo = require("./server/routes/testMongo.js")
 
 mongoose.connect("mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/assignment2?retryWrites=true&w=majority", function (err, db) {
     if (err) {throw err}
