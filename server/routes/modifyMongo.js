@@ -16,6 +16,7 @@ const eventSchema = new mongoose.Schema({
 const eventModel = mongoose.model("events", eventSchema)
 
 router.get("/api/update/:id", (req, res) => {
+
     eventModel.updateOne(
       {_id: {$eq: req.params.id}},
       {$inc: {hits: 1}},

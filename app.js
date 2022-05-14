@@ -14,13 +14,10 @@ mongoose.connect("mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/as
 
     db.collection('userAccounts').find().toArray((err, result) => {
         if (err) {throw err}
-
-        console.log(result)
     })
 });
 
 app.get('/profile/:id', function (req, res) {
-    console.log(req.params);
     const url = `https://pokeapi.co/api/v2/pokemon/${req.params.id}/`
 
     https.get(url, function (https_res) {
@@ -31,7 +28,6 @@ app.get('/profile/:id', function (req, res) {
     
         https_res.on("end", function() {
             data = JSON.parse(data);
-            console.log(data)
             res.render("profile.ejs", {
                 "pokeId": req.params.id,
                 "pokeName": data.name,

@@ -117,7 +117,6 @@ async function search() {
     } else {freeSearch = false}
 
     if ($('#typeFilter :selected').val() == `any`) {
-        console.log("ANY SEARCH")
     	for ( i=1; i<899; i++)
     	{
             type = `https://pokeapi.co/api/v2/pokemon/${i}/`
