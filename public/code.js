@@ -89,7 +89,7 @@ async function loadNineImages() {
         // 2- init a AJAX request to pokeapi.co
         await $.ajax({
             type: "GET",
-            url: `/api/test`,
+            url: `/api/getPokemon`,
             success: processPokeResp
         })
 

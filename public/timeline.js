@@ -3,8 +3,6 @@ length = 0;
 
 async function increaseHits(id) {
 
-    console.log("click")
-
     type = `http://localhost:5000/api/update`
     await $.ajax({
         type: "GET",
@@ -18,17 +16,7 @@ async function increaseHits(id) {
     })
 }
 
-// async function post() {
-//     type = `http://localhost:5000/api/testMongo`
-//     console.log(type)
-//     await $.ajax({
-//         type: "POST",
-//         url: type,
-//     })
-// }
-
 function print(data) {
-    console.log(data)
     to_add = ``;
     
     to_add += `<div id="timelineContainer">`
@@ -49,8 +37,7 @@ function print(data) {
 }
 
 async function setup() {
-    type = `http://localhost:5000/api/testEvent`
-    console.log(type)
+    type = `http://localhost:5000/api/read`
     await $.ajax({
         type: "GET",
         url: type,

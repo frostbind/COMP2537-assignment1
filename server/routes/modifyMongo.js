@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pokemon = require('./pokemon.json');
 const mongoose = require("mongoose");
-const { param } = require('./test');
+const { param } = require('./getPokemon');
 const mongodb = "mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/assignment2?retryWrites=true&w=majority";
 let eventDb
 mongoose.connect(mongodb, function (err, db) {
@@ -16,7 +16,6 @@ const eventSchema = new mongoose.Schema({
 const eventModel = mongoose.model("events", eventSchema)
 
 router.get("/api/update/:id", (req, res) => {
-    console.log(req.params.id);
     eventModel.updateOne(
       {_id: {$eq: req.params.id}},
       {$inc: {hits: 1}},
@@ -25,7 +24,7 @@ router.get("/api/update/:id", (req, res) => {
         res.redirect("./../../timeline.html")
       })
   })
-router.get("/api/testMongo", (req, res) => {
+router.get("/api/insert", (req, res) => {
     mongoose.connect(mongodb, function (err, db) {
         db.collection('events').insertOne({
                 "date": Date.now(),
@@ -38,7 +37,7 @@ router.get("/api/testMongo", (req, res) => {
     res.redirect("./../timeline.html")
 });
 
-router.get("/api/testEvent", (req, res) => {
+router.get("/api/read", (req, res) => {
   mongoose.connect(mongodb, function (err, db) {
     db.collection('events').find().toArray(function (err, result) {
       if (result.length < 1) {

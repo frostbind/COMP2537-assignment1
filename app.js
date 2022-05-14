@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 app.set('view engine', 'ejs');
 
 const router = express.Router();
-const test = require("./server/routes/test.js")
-const testMongo = require("./server/routes/testMongo.js")
+const getPokemon = require("./server/routes/getPokemon.js")
+const modifyMongo = require("./server/routes/modifyMongo.js")
 
 mongoose.connect("mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/assignment2?retryWrites=true&w=majority", function (err, db) {
     if (err) {throw err}
@@ -60,8 +60,8 @@ app.get("/timeline", function (req, res) {
 
 app.use(express.static('./public/'));
 
-app.use(test)
-app.use(testMongo)
+app.use(getPokemon)
+app.use(modifyMongo)
 
 app.listen(port, function (err) {
     if (err)
