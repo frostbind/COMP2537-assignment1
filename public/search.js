@@ -175,12 +175,11 @@ async function previousSearch() {
         success: loadSearchResults
     })
 
-
     // for (let index = 0; index < previousSearches; index++) {
     //     if (document.getElementById(index).value == $('#prevSearch :selected').val()) {
     //         console.log(index)
     //         console.log(document.getElementById(`${index}name`))
-    //         console.log(document.getElementById(`${index}name`))
+    //         (document.getElementById(`${index}name`))
     //         // searchName = document.getElementById(`${index}name`).value
     //         // searchWeight = document.getElementById(`${index}name`).value
 
