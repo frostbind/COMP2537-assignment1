@@ -1,0 +1,33 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.eventContainer {
+    border: solid 1px black;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.timelineContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.eventContainer form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.eventContainer form * {
+    margin-right: 5px;
+    margin-left: 5px;
+}

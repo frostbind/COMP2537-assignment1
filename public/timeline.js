@@ -22,13 +22,12 @@ function print(data) {
     to_add += `<div id="timelineContainer">`
 
     for (let i = 0; i < data.length; i++) {
-        to_add += `<div style="border: solid 1px black;">`
+        to_add += `<div class="eventContainer">`
         to_add += `<div>${new Date(data[i].date)}</div>`
-        to_add += `<div>${data[i].hits}</div>`
         to_add += ` <form action="/api/update/${data[i]._id}" method="get" id="likeButton">
-                        <input type="submit" value="Like">
+                        <label for="likeButton">${data[i].hits} Hits</label>
+                        <input id="likeButton" type="submit" value="Like">
                     </form>`
-        to_add += `<span style="display: none;">${data[i]._id}</span>`
         to_add += `</div>`
         length++;
     }
