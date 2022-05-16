@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In / Log Out</title>
+
+    <link rel="stylesheet" href="\styles/header.css">
+    <link rel="stylesheet" href="\styles/login.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <form action="/home" method="get" id="homeButton">
+                <input type="submit" value="Home"/>
+            </form>
+            <form action="/search" method="get" id="searchButton">
+                <input type="submit" value="Search"/>
+            </form>
+            <form action="/timeline" method="get" id="timelineButton">
+                <input type="submit" value="Timeline">
+            </form>
+        </nav>
+        <h1>Log In / Log Out</h1>
+    </header>
+    <main>
+        <form action="/api/authenticate" method="post" id="loginForm">
+            <label for="usernameField">Username</label>
+            <input id="usernameField" name="usernameField" type="text" required>
+            <label for="passwordField">Password</label>
+            <input id="passwordField" name="passwordField" type="password" required>
+            <input type="submit" value="Log in">
+        </form>
+        <form action="/api/authenticate" method="post" id="logOutButton">
+            <input id="logout" type="submit" value="Log Out" name="logOut">
+        </form>
+    </main>
+    <footer>
+        <h5>
+            Copyright © Your Website 2022
+        </h5>
+    </footer>
+</body>
+</html>
+
+

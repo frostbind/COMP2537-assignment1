@@ -2,18 +2,16 @@ to_add = ``;
 length = 0;
 
 async function increaseHits(id) {
-
     type = `http://localhost:5000/api/update`
     await $.ajax({
         type: "GET",
         url: type,
         data: {
             thing: id,
-        },
-        success: function () {
-            
         }
     })
+
+    
 }
 
 function print(data) {
@@ -35,12 +33,25 @@ function print(data) {
     jQuery("main").html(to_add)
 }
 
+async function checkUser(data) {
+    console.log(data);
+    if (data) {
+        type = `http://localhost:5000/api/read`
+        await $.ajax({
+            type: "GET",
+            url: type,
+            success: print
+        })
+    } else {
+        jQuery("main").html(`<div>Log In First!</div>`)
+    }
+}
+
 async function setup() {
-    type = `http://localhost:5000/api/read`
     await $.ajax({
-        type: "GET",
-        url: type,
-        success: print
+        type: `GET`,
+        url: `http://localhost:5000/api/getUser`,
+        success: checkUser
     })
 }
 

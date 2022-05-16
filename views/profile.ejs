@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <script src="./../profile.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <link rel="stylesheet" href="/styles/profile.css" type="text/css">
     <link rel="stylesheet" href="/styles/header.css" type="text/css">
 </head>
@@ -19,6 +22,12 @@
             </form>
             <form action="/search" method="get" id="searchButton">
                 <input type="submit" value="Search"/>
+            </form>
+            <form action="/timeline" method="get" id="timelineButton">
+                <input type="submit" value="Timeline">
+            </form>
+            <form action="/login" method="get" id="timelineButton">
+                <input type="submit" value="Log In / Log Out">
             </form>
         </nav>
         <h1> <%= pokeName %> (<%= pokeId %>)</h1>
@@ -61,7 +70,7 @@
             </div>
         </div>
 
-        <p></p>
+        <button id="shoppingAdd">Add to Shopping Cart</button>
     </main>
         
     <footer>

@@ -1,7 +1,8 @@
 {
     "charmander": {
         "name": "Charmander",
-        "id":   "",
+        "id":   "132",
+        "hp": "",
         "atk":  "",
         "def":  "",
         "sAtk": "",

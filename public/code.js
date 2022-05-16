@@ -64,7 +64,7 @@ function processPokeResp(data){
     backgroundColor = "#EE8130"
     
     // console.log(data.types[0].type.name === "normal")
-    // 3- process the reponse and extract the img
+    console.log(data.charmander);
     to_add += `
     <div class="pokemonContainer" style="background-color:${backgroundColor}">
         <h2>${data.charmander.name}</h2>
