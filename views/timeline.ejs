@@ -1,11 +1,11 @@
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline</title>
-    <script src="./../timeline.js"></script>
+    <script defer src="./../timeline.js"></script>
     <link rel="stylesheet" href="\styles/header.css">
     <link rel="stylesheet" href="\styles/timeline.css">
 </head>
@@ -22,16 +22,21 @@
             <form action="/login" method="get" id="timelineButton">
                 <input type="submit" value="Log In / Log Out">
             </form>
+            <form action="/userProfile" method="get" id="timelineButton">
+                <input type="submit" value="User Profile">
+            </form>
         </nav>
         <h1>Timeline</h1>
     </header>
 
-    <main></main>
-    
     <form action="/api/insert" method="get" id="timelineButton">
-        <label for="addEvent">Add Event</label>
-        <input id="addEvent" type="submit" value="Add Event">
+        <label class="formElement" for="addEvent">Add Event</label>
+        <input class="formElement" id="addEvent" type="submit" value="Add Event">
     </form>
+
+    <main>
+        
+    </main>
 
     <footer>
         <h5>

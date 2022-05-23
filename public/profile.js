@@ -1,13 +1,17 @@
-function processPokeResp(data) {
-
+async function addToCart(button) {
+    await $.ajax({
+        type: "GET",
+        url: `http://localhost:5000/api/addToCart/${button.id}`,
+        success: function () {
+            
+        }
+    })
+    console.log("success");
+    location.reload();
 }
 
 async function setup() {
-    await $.ajax({
-        type: "GET",
-        url: `/api/getPokemon`,
-        success: processPokeResp
-    })
+
 }
 
 jQuery(document).ready(setup)

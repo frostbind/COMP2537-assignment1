@@ -4,6 +4,8 @@ const pokemon = require('./pokemon.json');
 const mongoose = require("mongoose");
 const session = require("express-session");
 const { param } = require('./getPokemon');
+const bcrypt = require(`bcrypt`);
+const saltRounds = 10;
 const mongodb = "mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/assignment2?retryWrites=true&w=majority";
 let eventDb
 
@@ -23,25 +25,73 @@ router.use(
   })
 );
 
-
 mongoose.connect(mongodb, function (err, db) {
     if (err) {throw err;}
     eventDb = db;
 })
 const eventSchema = new mongoose.Schema({
   time: Date,
-  hits: Number
+  hits: Number,
+  user: String
 })
 const eventModel = mongoose.model("events", eventSchema)
 
-router.get("/api/update/:id", (req, res) => {
+const cartSchema = new mongoose.Schema({
+  user: String,
+  contents: Array,
+  isActive: Boolean
+})
+const cartModel = mongoose.model("cartItems", cartSchema)
 
+router.get("/api/checkout", (req, res) => {
+  mongoose.connect(mongodb, function (err, db) {
+    if (err) {throw err}
+    db.collection(`cartItems`).find({
+      user: {$eq: req.session.user},
+    }).toArray((err, data) => {
+      if (err) {throw err}
+      db.collection(`previousOrders`).insertOne({
+        user: req.session.user,
+        contents: data[0].contents,
+        date: Date.now()
+      }, function (err, data) {
+        if (err) {throw err}
+        db.collection(`cartItems`).updateOne(
+          {user: {$eq: req.session.user}},
+          {$set: {contents: []}},
+          function (err, data) {
+            if (err) {throw err}
+            res.status(200).send(data)
+          }
+        )
+      })
+    })
+  })
+})
+
+router.get("/api/addToCart/:id", (req, res) => {
+  console.log(`${req.params.id} and ${req.session.user}`);
+  mongoose.connect(mongodb, function (err, db) {
+    if (err) {throw err}
+    db.collection(`cartItems`).updateOne(
+      {user: {$eq: req.session.user}},
+      {$push: {contents: req.params.id}},
+      function (err, data) {
+        if (err) {throw err}
+        console.log(data);
+        res.status(200).send(data);
+      }
+    )
+  })
+})
+
+router.get("/api/update/:id", (req, res) => {
     eventModel.updateOne(
       {_id: {$eq: req.params.id}},
       {$inc: {hits: 1}},
       function (err, data) {
-        console.log(err);
-        res.redirect("./timeline.ejs")
+        if (err) {throw err}
+        res.status(200).send(data);
       })
   })
 router.get("/api/insert", (req, res) => {
@@ -49,6 +99,7 @@ router.get("/api/insert", (req, res) => {
         db.collection('events').insertOne({
                 "date": Date.now(),
                 "hits": 0,
+                "user": req.session.user,
           })
           .then(function(result) {
             // process result
@@ -59,11 +110,14 @@ router.get("/api/insert", (req, res) => {
 
 router.get("/api/read", (req, res) => {
   mongoose.connect(mongodb, function (err, db) {
-    db.collection('events').find().toArray(function (err, result) {
-      if (result.length < 1) {
+    db.collection('events').find().toArray(function (err, events) {
+      if (err) {throw err}
+      if (events.length < 1) {
         console.log("No results")
       } else {
-        res.status(200).send(result)
+        res.status(200).send(events.filter(function (event) {
+          return event.user == req.session.user;
+        }))
       }
     });
     })
@@ -93,10 +147,12 @@ router.post("/api/authenticate", function (req, res) {
           req.session.user = req.body.usernameField;
           req.session.isAdmin = user.isAdmin;
           console.log(`logged in`)
-          res.redirect(`./../../index.html`)
+          res.render("./userProfile.ejs", {
+            "username": req.session.user
+        });
       } else {
         console.log("Wrong Password");
-        res.render(`./../timeline.html`)
+        res.redirect("./../login.html")
       }
     });
     })
@@ -104,6 +160,41 @@ router.post("/api/authenticate", function (req, res) {
 
 router.get("/api/getUser", function (req, res) {
   res.status(200).send(req.session.authenticated);
+})
+
+router.get("/userProfile", function (req, res) {
+  if (req.session.user != undefined) {
+    res.render("./userProfile.ejs", {
+      "username": req.session.user
+  });
+  } else {
+    res.redirect("./login.html")
+  }
+})
+
+router.get("/api/getCart", (req, res) => {
+  mongoose.connect(mongodb, (err, db) => {
+    if (err) {throw err}
+    db.collection(`cartItems`).find({
+      user: {$eq: req.session.user}
+    }).toArray((err, data) => {
+      if (err) {throw err}
+      res.status(200).send(data[0])
+    })
+  })
+})
+
+router.get("/api/getPrevOrders", (req, res) => {
+  mongoose.connect(mongodb, (err, db) => {
+    if (err) {throw err} {
+      db.collection(`previousOrders`).find({
+        user: {$eq: req.session.user}
+      }).toArray((err, data) => {
+        if (err) {throw err}
+        res.status(200).send(data);
+      })
+    }
+  })
 })
 
 module.exports = router;

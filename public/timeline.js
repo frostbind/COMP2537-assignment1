@@ -1,17 +1,25 @@
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = Array.prototype.forEach;
 to_add = ``;
 length = 0;
 
-async function increaseHits(id) {
-    type = `http://localhost:5000/api/update`
+$(document.getElementsByClassName("likeButton")).click(function () {
+    alert($(this).text());
+});
+
+
+
+async function incrementHits(button) {
+    console.log(button.id);
     await $.ajax({
         type: "GET",
-        url: type,
-        data: {
-            thing: id,
+        url: `http://localhost:5000/api/update/${button.id}`,
+        success: function () {
+            
         }
     })
-
-    
+    console.log("success");
+    location.reload();
 }
 
 function print(data) {
@@ -22,19 +30,15 @@ function print(data) {
     for (let i = 0; i < data.length; i++) {
         to_add += `<div class="eventContainer">`
         to_add += `<div>${new Date(data[i].date)}</div>`
-        to_add += ` <form action="/api/update/${data[i]._id}" method="get" id="likeButton">
-                        <label for="likeButton">${data[i].hits} Hits</label>
-                        <input id="likeButton" type="submit" value="Like">
-                    </form>`
+        to_add += `<p>${data[i].hits}</p>`
+        to_add += `<button id="${data[i]._id}" onclick="incrementHits(this);">Like</button>`
         to_add += `</div>`
-        length++;
     }
 
     jQuery("main").html(to_add)
 }
 
 async function checkUser(data) {
-    console.log(data);
     if (data) {
         type = `http://localhost:5000/api/read`
         await $.ajax({
@@ -48,6 +52,7 @@ async function checkUser(data) {
 }
 
 async function setup() {
+    console.log("timeline setup");
     await $.ajax({
         type: `GET`,
         url: `http://localhost:5000/api/getUser`,
@@ -56,3 +61,4 @@ async function setup() {
 }
 
 jQuery(document).ready(setup)
+

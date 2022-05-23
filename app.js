@@ -1,8 +1,11 @@
 const express = require('express')
 const app = express()
+const session = require("express-session");
 const https = require("https");
 const port = process.env.PORT || 5000
 const mongoose = require("mongoose");
+const bcrypt = require(`bcrypt`);
+const saltRounds = 10;
 app.set('view engine', 'ejs');
 
 const router = express.Router();
@@ -18,20 +21,28 @@ mongoose.connect("mongodb+srv://frostbind:Alex1427@cluster0.5wm77.mongodb.net/as
     })
 });
 
+app.use(
+    session({
+      secret: "assignment3",
+      saveUnintialized: true,
+      resave: true,
+    })
+  );
+
 app.get('/profile/:id', function (req, res) {
     const url = `https://pokeapi.co/api/v2/pokemon/${req.params.id}/`
 
-    res.render("profile.ejs", {
-        "pokeId": pokemon.charmander.id,
-        "pokeName": pokemon.charmander.name,
+    // res.render("profile.ejs", {
+    //     "pokeId": pokemon.charmander.id,
+    //     "pokeName": pokemon.charmander.name,
 
-        "hp": pokemon.charmander.hp,
-        "atk": pokemon.charmander.atk,
-        "def": pokemon.charmander.def,
-        "sAtk": pokemon.charmander.sAtk,
-        "sDef": pokemon.charmander.sDef,
-        "spd": pokemon.charmander.spd
-    }); 
+    //     "hp": pokemon.charmander.hp,
+    //     "atk": pokemon.charmander.atk,
+    //     "def": pokemon.charmander.def,
+    //     "sAtk": pokemon.charmander.sAtk,
+    //     "sDef": pokemon.charmander.sDef,
+    //     "spd": pokemon.charmander.spd
+    // }); 
 
     // $.ajax({
     //     type: "GET",
@@ -46,21 +57,20 @@ app.get('/profile/:id', function (req, res) {
         https_res.on("data", function (chunk) {
             data += chunk
         })
-    
-        // https_res.on("end", function() {
-        //     data = JSON.parse(data);
-        //     res.render("profile.ejs", {
-        //         "pokeId": req.params.id,
-        //         "pokeName": data.name,
+        https_res.on("end", function() {
+            data = JSON.parse(data);
+            res.render("profile.ejs", {
+                "pokeId": req.params.id,
+                "pokeName": data.name,
 
-        //         "hp": data.stats[0].base_stat,
-        //         "atk": data.stats[1].base_stat,
-        //         "def": data.stats[2].base_stat,
-        //         "sAtk": data.stats[3].base_stat,
-        //         "sDef": data.stats[4].base_stat,
-        //         "spd": data.stats[5].base_stat
-        //     }); 
-        // })
+                "hp": data.stats[0].base_stat,
+                "atk": data.stats[1].base_stat,
+                "def": data.stats[2].base_stat,
+                "sAtk": data.stats[3].base_stat,
+                "sDef": data.stats[4].base_stat,
+                "spd": data.stats[5].base_stat
+            }); 
+        })
     })
 })
 app.get("/home", function (req, res) {
@@ -72,11 +82,21 @@ app.get("/search", function (req, res) {
 })
 
 app.get("/timeline", function (req, res) {
-    res.render("./timeline.ejs")
+    if (req.session.user != undefined) {
+        res.render("./timeline.ejs")
+    } else {
+        res.redirect("./login.html")
+    }
+    
 })
 
 app.get("/login", function (req, res) {
-    res.redirect("./login.html")
+    if (req.session.user != undefined) {
+        res.redirect("./index.html")
+    } else {
+        res.redirect("./login.html")
+    }
+    
 })
 
 app.use(express.static('./public/'));
