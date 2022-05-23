@@ -9,5 +9,5 @@ This web application uses APIs to simulate a pokedex that users can query for sp
 
 The web application will also show various combat stats for pokemon through a profile page
 
-
-test
+Assignment 3 Demom
+https://youtu.be/mkaFMYzRVRI
