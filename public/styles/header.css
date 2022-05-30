@@ -15,6 +15,7 @@ header {
     position: sticky;
     background-color: grey;
     border-bottom-right-radius: 20px;
+    z-index: 1;
 }
 
 nav {

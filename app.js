@@ -99,6 +99,14 @@ app.get("/login", function (req, res) {
     
 })
 
+app.get("/memoryGame", function (req, res) {
+    if (req.session.user != undefined) {
+        res.redirect("./memoryGame.html")
+    } else {
+        res.redirect("./login.html")
+    }
+})
+
 app.use(express.static('./public/'));
 
 app.use(getPokemon)

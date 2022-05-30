@@ -197,4 +197,9 @@ router.get("/api/getPrevOrders", (req, res) => {
   })
 })
 
+router.get("/api/startGame", (req, res) => {
+  console.log("Request Recieved")
+  res.status(200).send("Success");
+})
+
 module.exports = router;

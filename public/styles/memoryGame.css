@@ -7,8 +7,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     border: 1px solid black;
     margin: auto;
 }
@@ -17,16 +17,26 @@
     width: calc(33% - 10px);
     position: relative;
     transition: transform 1s;
+    transform-style: preserve-3d;
 }
 
 .back_face, .front_face {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    transform-style: preserve-3d;
+    height: 125px;
     backface-visibility: hidden;
+    position: absolute;
 }
 
 .front_face {
     transform: rotateY(180deg);
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+img {
+    width: 100%;
+    height: 100%;
 }

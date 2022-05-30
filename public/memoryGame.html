@@ -8,6 +8,7 @@
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer src="\memoryGame.js"></script>
     <link rel="stylesheet" href="\styles/memoryGame.css">
+    <link rel="stylesheet" href="\styles/header.css">
     <title>Memory Game</title>
 </head>
 <body>
@@ -31,6 +32,14 @@
         </nav>
         <h1>Pokemon Memory</h1>
     </header>
+    <form id="gameParams">
+        <label for="gridLength">Game Size</label>
+        <input type="number" name="gameSize" id="gameSize" min="4" max="16" required step="2">
+
+        <label for="easyStart">Start Game</label>
+        <input type="submit" name="easy" id="easyStart" class="startButton">
+        <p>30 seconds to beat the game!</p>
+    </form>
     <main>
         <div id="gameGrid">
             <div class="card">
